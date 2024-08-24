@@ -102,11 +102,22 @@
                 img.src = clippedCanvas.toDataURL();
                 document.body.appendChild(img);
 
+                fetch('http://127.0.0.1:5000/upload', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        image: img.src
+                    })
+                });
+
             });
 
 
 
-           
+
+            // CALL TO BACKEND API HERE
 
 
             // giveColorToRect(layer, power)
@@ -137,13 +148,13 @@
                 console.log("Area of rectangle is", areaOfrect, "meters square");
                 const areaOfBuilding = data.percent * areaOfrect;
                 console.log("Area of building is", areaOfBuilding, "meters square");
-                
+
 
                 //to be  fetched from the NASA api
-                perunitRadiation=1000
-                
+                perunitRadiation = 1000
+
                 // Calculate the solar power based on the area of the building
-                const power = areaOfBuilding * perunitRadiation ;  // Example power calculation, adjust according to your dataset
+                const power = areaOfBuilding * perunitRadiation;  // Example power calculation, adjust according to your dataset
                 console.log("Solar power (W):", power);
 
                 // Change the rectangle color based on solar power
